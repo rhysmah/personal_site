@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func home(w http.ResponseWriter, r *http.Request) {
+func homeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello, my name is Rhys Mahannah."))
 }
 
@@ -16,8 +16,8 @@ func resumeHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/{$}", home)
-	mux.HandleFunc("/resume", resumeHandler)
+	mux.HandleFunc("GET /{$}", homeHandler)
+	mux.HandleFunc("GET /resume", resumeHandler)
 
 	log.Println("starting on server :4000")
 

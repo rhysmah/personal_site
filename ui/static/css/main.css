@@ -1,0 +1,84 @@
+/* Reset some default styles */
+body, h1, h2, p, a, nav, footer {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General body styles */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #B0C7D0; /* Light grey text */
+    background-color: #1C1E26; /* Dark background */
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    font-weight: 400;
+    margin-left: 10px;
+    color: #FFFFFF; /* White text */
+}
+
+header h1 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navigation styles */
+nav {
+    margin-bottom: 40px;
+}
+
+nav a {
+    color: #64E6B0; /* Light green */
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Main content styles */
+main {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #FFFFFF; /* White text */
+}
+
+p {
+    font-size: 1.1em;
+    color: #B0C7D0; /* Light grey text */
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #2A2D39;
+    color: #B0C7D0;
+}
+
+footer a {
+    color: #64E6B0; /* Light green */
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

@@ -5,14 +5,6 @@ import (
 	"net/http"
 )
 
-func home(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Home Page"))
-}
-
-func about(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("About Page"))
-}
-
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /{$}", home)

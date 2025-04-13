@@ -5,15 +5,20 @@ import (
 	"net/http"
 )
 
+// Home handler writes a byte slice containing text
+// This text is the response BODY
+func home(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Home Page"))
+}
+
+func about(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("About Page"))
+}
+
 func main() {
 	mux := http.NewServeMux()
-
-	fileServer := http.FileServer(http.Dir("./ui/static/"))
-
-	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
-
-	mux.HandleFunc("/", homeHandler)
-	mux.HandleFunc("/resume", resumeHandler)
+	mux.HandleFunc("GET /{$}", home)
+	mux.HandleFunc("GET /about", about)
 
 	log.Print("starting server on :4000")
 

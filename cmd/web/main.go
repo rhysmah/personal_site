@@ -5,8 +5,6 @@ import (
 	"net/http"
 )
 
-// Home handler writes a byte slice containing text
-// This text is the response BODY
 func home(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Home Page"))
 }

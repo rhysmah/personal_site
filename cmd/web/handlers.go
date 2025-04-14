@@ -7,14 +7,27 @@ import (
 )
 
 func home(w http.ResponseWriter, r *http.Request) {
-	ts, err := template.ParseFiles("./ui/html/pages/home.html")
+	w.Header().Add("Server", "Go")
+
+	// Slice containing paths to HTMLs
+	// Base template must be the *first* template
+	files := []string{
+		"./ui/html/base.html",
+		"./ui/html/partials/nav.html",
+		"./ui/html/pages/home.html",
+	}
+
+	// Read the files and store templates into template set
+	// '...' is used for variadic arguments
+	ts, err := template.ParseFiles(files...)
 	if err != nil {
 		log.Println(err.Error())
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return // return so no subsequent code is executed
 	}
 
-	err = ts.Execute(w, nil)
+	// Write content of the "base" template as response body
+	err = ts.ExecuteTemplate(w, "base", nil)
 	if err != nil {
 		log.Println(err.Error())
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)

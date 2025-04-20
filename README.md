@@ -14,6 +14,10 @@ Based on the guide I'm using to build this site, Let's Go (Alex Edwards), I will
 - HTML templates
   - base template
   - the '.', dynamic data you want to pass and display in a template
+  - Setting up proper configurations for a web app via the CLI
+
+
+
 - Model-View-Controller Pattern
   - *Models* are the data structures and business logic 
   - *Views* are HTML (dynamic) templates that display info

@@ -2,11 +2,11 @@ package main
 
 import (
 	"html/template"
-	"log"
+	"log/slog"
 	"net/http"
 )
 
-func home(w http.ResponseWriter, r *http.Request) {
+func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	// Slice containing paths to HTMLs
 	// Base template must be *first*
 	files := []string{
@@ -20,7 +20,11 @@ func home(w http.ResponseWriter, r *http.Request) {
 	// and passes each string in the slice as an argument to be processed.
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
-		log.Println(err.Error())
+
+		app.logger.Error(err.Error(),
+			slog.Any("method", r.Method),
+			slog.Any("path", r.URL.RequestURI()))
+
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return // return so no subsequent code is executed
 	}
@@ -28,11 +32,15 @@ func home(w http.ResponseWriter, r *http.Request) {
 	// Write content of the "base" template as response body
 	err = ts.ExecuteTemplate(w, "base", nil)
 	if err != nil {
-		log.Println(err.Error())
+
+		app.logger.Error(err.Error(),
+			slog.Any("method", r.Method),
+			slog.Any("path", r.URL.RequestURI()))
+
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 }
 
-func about(w http.ResponseWriter, r *http.Request) {
+func (app *application) about(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("About Page"))
 }

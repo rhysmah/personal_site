@@ -5,11 +5,9 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
-)
 
-type application struct {
-	logger *slog.Logger
-}
+	"github.com/rhysmah/personal_site/internal/log"
+)
 
 func main() {
 
@@ -17,15 +15,10 @@ func main() {
 	addr := flag.String("addr", ":4000", "HTTP network address")
 	flag.Parse()
 
-	// Structured Logger
-	// Setting minimum level to LevelDebug, which are the least severe
-	// and are, by default, silently discarded from logs
-	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
-		Level:     slog.LevelDebug,
-		AddSource: true, // includes filename and log number
-	}))
+	// Instantiate custom logger
+	logger := log.Default()
 
-	// Instantiate the struct that uses the logger
+	// Instantiate custom application type; inject the custom logger.
 	app := &application{
 		logger: logger,
 	}
@@ -35,9 +28,11 @@ func main() {
 	mux.HandleFunc("GET /about", app.about)
 
 	// .Any() prevents !BADKEY errors
-	logger.Info("Starting server", slog.Any("addr", *addr))
+	app.logger.Info("Starting server", slog.Any("addr", *addr))
 
 	err := http.ListenAndServe(*addr, mux)
-	logger.Error(err.Error()) // Human-readable message
-	os.Exit(1)                // No equivalent to log.Fatal(), which calls this automatically
+	if err != nil {
+		app.logger.Error("Server failed", slog.String("error", err.Error()), slog.String("addr", *addr))
+		os.Exit(1)
+	}
 }

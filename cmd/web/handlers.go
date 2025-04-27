@@ -4,16 +4,24 @@ import (
 	"html/template"
 	"log/slog"
 	"net/http"
+
+	"github.com/rhysmah/personal_site/internal/log"
 )
 
+type application struct {
+	logger *log.Logger
+}
+
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	// Slice containing paths to HTMLs
-	// Base template must be *first*
+	// Slice containing paths to HTMLs. Base template must be *first*
 	files := []string{
 		"./ui/html/base.html",
 		"./ui/html/partials/nav.html",
 		"./ui/html/pages/home.html",
 	}
+
+	// Initialize logger
+	logger := log.Default()
 
 	// Read the files and store templates into template set
 	// '...' is used for variadic arguments -- it unpacks a slice of strings
@@ -21,7 +29,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
 
-		app.logger.Error(err.Error(),
+		logger.Error(err.Error(),
 			slog.Any("method", r.Method),
 			slog.Any("path", r.URL.RequestURI()))
 
@@ -33,7 +41,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	err = ts.ExecuteTemplate(w, "base", nil)
 	if err != nil {
 
-		app.logger.Error(err.Error(),
+		logger.Error(err.Error(),
 			slog.Any("method", r.Method),
 			slog.Any("path", r.URL.RequestURI()))
 

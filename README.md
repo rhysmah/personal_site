@@ -40,18 +40,14 @@ The structure fields, while optional, allow developers to include additional dat
 
 Once the Record is created, it's passed to one or more Handlers. A Handler determines what happens to the log information -- where it's stored, how it's formatted, and which logs are processed based on filtering rules. A Logger can have multiple Handlers, each processing the Record differently depending on the context. For example, a development environment might use a ConsoleHandler to displays barebones data in the terminal, while a FileHandler writes comprehensive JSON-formatted logs to a file for later analysis.
 
+### Logging -- An In-Depth Examination
 
-At a high level, there are three components associated with loggers. The Logger struct, the Record struct, and the Handler struct.
+[27 April 2025]
 
-The Logger is a public interface that users interact with to create logs. It contains methods, such as Debug, Info, Error, and Fatal, for different logging severity levels.
+I've decided to explore logging in more detail. While a simple logger would be perfectly acceptable for a small project like mine -- a one- or two-page personal website -- I'm interested in learning more about logging leading practices. So I'll be exploring Go's `slog` package and building a slightly more sophisticated custom logger.
 
-A Logger creates a Record, which contains all the information for a log event, including the Time at which the output method was called, the Message, the severity Level, and structured fields (key-value pairs).
-
-These structure fields (key-value pairs) allow us to provide additional information to our logs, including identifiers, measured values, status info, contextual data, and more. These are optional.
-
-Once this Record is created, it's passed to a Handler, which is responsible for where this information is stored, how it's displayed, and more. A log can have several different handlers, each of which handles the Record in different ways depending on context. For example, a developer may want a few details shared in their console, but a a detailed log that's written to a file.
-
-
+__References__
+- https://betterstack.com/community/guides/logging/logging-in-go/
 
 
 

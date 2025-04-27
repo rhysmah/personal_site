@@ -46,6 +46,13 @@ Once the Record is created, it's passed to one or more Handlers. A Handler deter
 
 I've decided to explore logging in more detail. While a simple logger would be perfectly acceptable for a small project like mine -- a one- or two-page personal website -- I'm interested in learning more about logging leading practices. So I'll be exploring Go's `slog` package and building a slightly more sophisticated custom logger.
 
+#### Types
+There are three main components to a Logger, which I've mentioned above but will repeat here:
+
+- **Logger**: (struct) the public interface that allows users to implement logging
+- **Record**: (struct) the specific instance of a log, with details. 
+- **Handler**: (interface) determines how the logs are formatted and where they're displayed or saved
+
 __References__
 - https://betterstack.com/community/guides/logging/logging-in-go/
 

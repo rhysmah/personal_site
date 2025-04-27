@@ -20,12 +20,12 @@ func main() {
 	// Structured Logger
 	// Setting minimum level to LevelDebug, which are the least severe
 	// and are, by default, silently discarded from logs
-	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
 		Level:     slog.LevelDebug,
 		AddSource: true, // includes filename and log number
 	}))
 
-	// Instantiate the struct that'll use the logger
+	// Instantiate the struct that uses the logger
 	app := &application{
 		logger: logger,
 	}

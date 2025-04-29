@@ -7,8 +7,8 @@ import (
 
 // Logger wraps slog.Loggers to create an application-specific custom logger
 // This uses *slog.Logger as an embedded type, an "is-a" relationship, meaning
-// the customer Logger type has access to all the slog methods (versus the
-// named type, a "has-a" relationship, which restricts access).
+// the customer Logger type has automatic access to all the slog methods (versus
+// the named type, a "has-a" relationship, which requires manual forwarding).
 type Logger struct {
 	*slog.Logger
 }

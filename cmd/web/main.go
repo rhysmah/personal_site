@@ -15,12 +15,9 @@ func main() {
 	addr := flag.String("addr", ":4000", "HTTP network address")
 	flag.Parse()
 
-	// Instantiate custom logger
-	logger := log.Default()
-
-	// Instantiate custom application type; inject the custom logger.
+	// Instantiate custom application type with custom logger injected
 	app := &application{
-		logger: logger,
+		logger: log.Default(),
 	}
 
 	mux := http.NewServeMux()

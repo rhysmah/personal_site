@@ -40,7 +40,7 @@ The structure fields, while optional, allow developers to include additional dat
 
 Once the Record is created, it's passed to one or more Handlers. A Handler determines what happens to the log information -- where it's stored, how it's formatted, and which logs are processed based on filtering rules. A Logger can have multiple Handlers, each processing the Record differently depending on the context. For example, a development environment might use a ConsoleHandler to displays barebones data in the terminal, while a FileHandler writes comprehensive JSON-formatted logs to a file for later analysis.
 
-### Logging -- An In-Depth Examination
+### Logging -- An Examination
 
 [27 April 2025]
 
@@ -49,9 +49,13 @@ I've decided to explore logging in more detail. While a simple logger would be p
 #### Types
 There are three main components to a Logger, which I've mentioned above but will repeat here:
 
-- **Logger**: (struct) the public interface that allows users to implement logging
+- **Logger**: (struct) the public interface that allows users to implement logging.
 - **Record**: (struct) the specific instance of a log, with details. 
-- **Handler**: (interface) determines how the logs are formatted and where they're displayed or saved
+- **Handler**: (interface) determines how the logs are formatted and where they're displayed or saved.
+
+** Add some information about the Leveler interface, which has a single method, Level(), that produces a Level value. This can be used to, for instance, create different Level values depending on environment -- developing versus production.
+
+** Need more information about Context
 
 __References__
 - https://betterstack.com/community/guides/logging/logging-in-go/

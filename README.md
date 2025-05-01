@@ -59,6 +59,6 @@ There are three main components to a Logger, which I've mentioned above but will
 
 __References__
 - https://betterstack.com/community/guides/logging/logging-in-go/
-
+- https://github.com/golang/example/blob/master/slog-handler-guide/README.md
 
 

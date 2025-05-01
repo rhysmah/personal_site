@@ -1,54 +1,42 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log/slog"
 	"net/http"
-
-	"github.com/rhysmah/personal_site/internal/log"
 )
 
 type application struct {
-	logger *log.Logger
+	logger *slog.Logger
 }
 
-func (app *application) home(w http.ResponseWriter, r *http.Request) {
+func (app *application) render(w http.ResponseWriter, r *http.Request, t string) {
 	// Slice containing paths to HTMLs. Base template must be *first*
 	files := []string{
 		"./ui/html/base.html",
 		"./ui/html/partials/nav.html",
-		"./ui/html/pages/home.html",
+		fmt.Sprintf("./ui/html/pages/%s", t),
 	}
 
-	// Initialize logger
-	logger := log.Default()
-
-	// Read the files and store templates into template set
-	// '...' is used for variadic arguments -- it unpacks a slice of strings
-	// and passes each string in the slice as an argument to be processed.
+	// Unpack strings and process them individually
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
-
-		logger.Error(err.Error(),
-			slog.Any("method", r.Method),
-			slog.Any("path", r.URL.RequestURI()))
-
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return // return so no subsequent code is executed
+		app.serverError(w, r, err)
+		return
 	}
 
 	// Write content of the "base" template as response body
 	err = ts.ExecuteTemplate(w, "base", nil)
 	if err != nil {
-
-		logger.Error(err.Error(),
-			slog.Any("method", r.Method),
-			slog.Any("path", r.URL.RequestURI()))
-
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		app.serverError(w, r, err)
 	}
 }
 
+func (app *application) home(w http.ResponseWriter, r *http.Request) {
+	app.render(w, r, "home.tmpl.html")
+}
+
 func (app *application) about(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("About Page"))
+	app.render(w, r, "about.tmpl.html")
 }

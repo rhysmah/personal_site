@@ -5,8 +5,6 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
-
-	"github.com/rhysmah/personal_site/internal/log"
 )
 
 func main() {
@@ -15,19 +13,21 @@ func main() {
 	addr := flag.String("addr", ":4000", "HTTP network address")
 	flag.Parse()
 
-	// Instantiate custom application type with custom logger injected
-	app := &application{
-		logger: log.Default(),
+	// Instantiate handler options and logger for injection
+	handlerOpts := slog.HandlerOptions{
+		Level:     slog.LevelDebug,
+		AddSource: true,
 	}
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &handlerOpts))
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("GET /{$}", app.home)
-	mux.HandleFunc("GET /about", app.about)
+	app := &application{
+		logger: logger,
+	}
 
 	// .Any() prevents !BADKEY errors
 	app.logger.Info("Starting server", slog.Any("addr", *addr))
 
-	err := http.ListenAndServe(*addr, mux)
+	err := http.ListenAndServe(*addr, app.routes())
 	if err != nil {
 		app.logger.Error("Server failed", slog.String("error", err.Error()), slog.String("addr", *addr))
 		os.Exit(1)

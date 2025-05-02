@@ -5,7 +5,6 @@
     padding: 0;
 }
 
-/* Theme variables - dark mode by default */
 :root {
     --primary-color: #1a73e8;
     --text-color: #e1e1e1;
@@ -17,7 +16,6 @@
     --hover-text: #000;
 }
 
-/* Light theme overrides */
 [data-theme="light"] {
     --text-color: #333;
     --secondary-text: #555;
@@ -27,7 +25,6 @@
     --hover-text: #fff;
 }
 
-/* Base typography */
 html {
     font-size: 16px;
     line-height: 1.6;
@@ -41,14 +38,12 @@ body {
     transition: color 0.3s, background-color 0.3s;
 }
 
-/* Layout containers */
 header, main, footer, .header-divider {
     width: 100%;
     max-width: var(--content-width);
     margin: 0 auto;
 }
 
-/* Typography */
 h1, h2, h3 {
     font-weight: 600;
     line-height: 1.2;
@@ -76,7 +71,6 @@ a {
     transition: color 0.3s, background-color 0.3s;
 }
 
-/* Header */
 header {
     display: flex;
     justify-content: space-between;
@@ -87,7 +81,6 @@ header h1 a {
     color: var(--text-color);
 }
 
-/* Navigation */
 .nav-links {
     display: flex;
     gap: 0.5rem;
@@ -105,7 +98,6 @@ header h1 a {
     color: var(--hover-text);
 }
 
-/* Horizontal divider */
 .header-divider {
     height: 1px;
     background-color: var(--border-color);
@@ -113,12 +105,10 @@ header h1 a {
     transition: background-color 0.3s;
 }
 
-/* Main content */
 main {
     min-height: 60vh;
 }
 
-/* Footer */
 footer {
     margin-top: 3rem;
     padding-top: 1rem;

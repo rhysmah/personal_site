@@ -1,10 +1,11 @@
-/* Reset */
+/* Reset and Base Styles */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* CSS Custom Properties */
 :root {
     --primary-color: #1a73e8;
     --text-color: #e1e1e1;
@@ -25,6 +26,7 @@
     --hover-text: #fff;
 }
 
+/* Base Typography */
 html {
     font-size: 16px;
     line-height: 1.6;
@@ -38,12 +40,19 @@ body {
     transition: color 0.3s, background-color 0.3s;
 }
 
-header, main, footer, .header-divider {
+/* Layout Container */
+.container {
     width: 100%;
     max-width: var(--content-width);
     margin: 0 auto;
 }
 
+/* Apply container styles to main structural elements */
+header, main, footer, .header-divider {
+    @extend .container;
+}
+
+/* Typography */
 h1, h2, h3 {
     font-weight: 600;
     line-height: 1.2;
@@ -52,7 +61,6 @@ h1, h2, h3 {
 
 h1 {
     font-size: 2.25rem;
-    text-align: left;
     margin-bottom: 0;
 }
 
@@ -68,9 +76,10 @@ p {
 a {
     color: var(--primary-color);
     text-decoration: none;
-    transition: color 0.3s, background-color 0.3s;
+    transition: color 0.3s;
 }
 
+/* Header */
 header {
     display: flex;
     justify-content: space-between;
@@ -81,34 +90,48 @@ header h1 a {
     color: var(--text-color);
 }
 
+/* Navigation */
 .nav-links {
     display: flex;
     gap: 0.5rem;
 }
 
-.nav-links a, .theme-toggle {
+.nav-links a,
+.theme-toggle {
     color: var(--text-color);
     padding: 0.4rem 0.6rem;
     border-radius: 4px;
     transition: color 0.3s, background-color 0.3s;
 }
 
-.nav-links a:hover, .theme-toggle:hover {
+.nav-links a:hover,
+.theme-toggle:hover {
     background-color: var(--hover-bg);
     color: var(--hover-text);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: transparent;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    border: none;
+}
+
+/* Main Content */
+main {
+    min-height: 60vh;
 }
 
 .header-divider {
     height: 1px;
     background-color: var(--border-color);
-    margin: 1rem auto 2rem auto;
+    margin: 1rem auto 2rem;
     transition: background-color 0.3s;
 }
 
-main {
-    min-height: 60vh;
-}
-
+/* Footer */
 footer {
     margin-top: 3rem;
     padding-top: 1rem;
@@ -122,16 +145,107 @@ footer a {
     color: var(--primary-color);
 }
 
-/* Dark mode toggle */
-.theme-toggle {
+/* Mobile Navigation */
+.hamburger {
+    display: none;
     background: transparent;
-    cursor: pointer;
-    font-size: 1.25rem;
-    line-height: 1;
     border: none;
+    cursor: pointer;
+    padding: 0.1rem;
+    z-index: 100;
+    position: relative;
 }
 
-/* Media queries */
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background-color: var(--text-color);
+    transition: all 0.3s;
+}
+
+/* Hamburger Animation */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Menu */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background);
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 99;
+    visibility: hidden;
+}
+
+.mobile-nav.active {
+    visibility: visible;
+}
+
+.mobile-menu {
+    display: flex;
+    flex-direction: column;
+    padding: 6rem 2rem 2rem;
+    gap: 2rem;
+}
+
+.mobile-menu a {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+}
+
+.mobile-footer {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 2rem;
+}
+
+.social-icons a {
+    color: var(--text-color);
+    transition: opacity 0.2s;
+}
+
+.social-icons a:hover {
+    opacity: 0.7;
+}
+
+.theme-toggle-mobile {
+    background-color: var(--text-color);
+    color: var(--background);
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+}
+
+/* Responsive Design */
 @media (max-width: 700px) {
     html {
         font-size: 15px;
@@ -141,14 +255,15 @@ footer a {
         padding: 1rem;
     }
 
-    header {
-        flex-direction: column;
-        align-items: flex-start;
+    .desktop-nav {
+        display: none;
     }
 
-    .theme-toggle {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
+    .hamburger {
+        display: block;
+    }
+
+    .mobile-nav {
+        display: flex;
     }
 }

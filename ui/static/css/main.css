@@ -38,18 +38,18 @@ body {
     background: var(--background);
     padding: 2rem 1rem;
     transition: color 0.3s, background-color 0.3s;
+
+    /* Flexbox sticky footer setup */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Layout Container */
-.container {
+header, main, footer, .header-divider {
     width: 100%;
     max-width: var(--content-width);
     margin: 0 auto;
-}
-
-/* Apply container styles to main structural elements */
-header, main, footer, .header-divider {
-    @extend .container;
 }
 
 /* Typography */
@@ -84,13 +84,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
 }
 
 header h1 a {
     color: var(--text-color);
 }
 
-/* Navigation */
+/* Navigation - Combined common styles */
 .nav-links {
     display: flex;
     gap: 0.5rem;
@@ -110,7 +111,7 @@ header h1 a {
     color: var(--hover-text);
 }
 
-/* Theme Toggle Button */
+/* Theme Toggle Button - Removed redundant styles */
 .theme-toggle {
     background: transparent;
     cursor: pointer;
@@ -121,7 +122,7 @@ header h1 a {
 
 /* Main Content */
 main {
-    min-height: 60vh;
+    flex: 1 0 auto;
 }
 
 .header-divider {
@@ -137,8 +138,9 @@ footer {
     padding-top: 1rem;
     border-top: 1px solid var(--border-color);
     color: var(--secondary-text);
-    font-size: 0.875rem;
     transition: border-color 0.3s;
+    text-align: center;
+    flex-shrink: 0;
 }
 
 footer a {
@@ -188,9 +190,11 @@ footer a {
     height: 100%;
     background-color: var(--background);
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: center;
     z-index: 99;
     visibility: hidden;
+    padding: 4rem 0;
 }
 
 .mobile-nav.active {
@@ -200,8 +204,9 @@ footer a {
 .mobile-menu {
     display: flex;
     flex-direction: column;
-    padding: 6rem 2rem 2rem;
+    padding: 2rem 0;
     gap: 2rem;
+    text-align: center;
 }
 
 .mobile-menu a {
@@ -213,24 +218,26 @@ footer a {
 }
 
 .mobile-footer {
-    padding: 2rem;
+    padding: 3rem 0 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
 }
 
+/* Social Icons - Consolidated styles */
 .social-icons {
     display: flex;
     gap: 2rem;
 }
 
-.social-icons a {
-    color: var(--text-color);
+.social-icon {
+    width: 24px;
+    height: 24px;
     transition: opacity 0.2s;
 }
 
-.social-icons a:hover {
+.social-icons a:hover .social-icon {
     opacity: 0.7;
 }
 

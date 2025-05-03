@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle: document.getElementById('theme-toggle'),
         themeToggleMobile: document.getElementById('theme-toggle-mobile'),
         hamburger: document.getElementById('hamburger'),
-        mobileNav: document.querySelector('.mobile-nav')
+        mobileNav: document.querySelector('.mobile-nav'),
+        socialIcons: document.querySelectorAll('.social-icon')
     };
 
     // Theme management
@@ -16,6 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const isLight = isLightTheme();
         elements.themeToggle.innerHTML = isLight ? '🌙' : '☀️';
         elements.themeToggleMobile.textContent = isLight ? 'DARK' : 'LIGHT';
+
+        // Update social icons
+        elements.socialIcons.forEach(icon => {
+            icon.src = isLight ? icon.dataset.lightSrc : icon.dataset.darkSrc;
+        });
     }
 
     function toggleTheme() {

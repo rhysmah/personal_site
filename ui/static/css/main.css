@@ -214,13 +214,27 @@ footer a {
     letter-spacing: 0.05em;
 }
 
-/* Responsive Layout */
-@media (max-width: 700px) {
-    html {font-size: 15px;}
-    body {padding: 1rem;}
-    footer {text-align: center;}
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
 
-    .desktop-nav {display: none;}
-    .hamburger {display: block;}
-    .mobile-nav.active {display: flex;}
+.contact-links a {
+    color: var(--primary-color);
+}
+
+@media (max-width: 700px) {
+    html { font-size: 15px; }
+    body { padding: 1rem; }
+    footer { text-align: center; }
+
+    .contact-links {
+        justify-content: center;
+        gap: 1rem;
+    }
+    .desktop-nav { display: none; }
+    .hamburger { display: block; }
+    .mobile-nav.active { display: flex; }
 }

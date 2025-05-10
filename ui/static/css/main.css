@@ -139,7 +139,6 @@ footer {
     border-top: 1px solid var(--border-color);
     color: var(--secondary-text);
     transition: border-color 0.3s;
-    text-align: center;
     flex-shrink: 0;
 }
 
@@ -164,7 +163,6 @@ footer a {
     height: 3px;
     margin: 5px 0;
     background-color: var(--text-color);
-    transition: all 0.3s;
 }
 
 /* Hamburger Animation */

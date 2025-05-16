@@ -46,7 +46,7 @@ body {
 }
 
 /* Layout Container */
-header, main, footer, .header-divider {
+header, main, footer, .section-divider {
     width: 100%;
     max-width: var(--content-width);
     margin: 0 auto;
@@ -66,7 +66,6 @@ h1 {
 
 h2 {
     font-size: 1.5rem;
-    margin-top: 2rem;
 }
 
 p {
@@ -76,6 +75,7 @@ p {
 a {
     color: var(--primary-color);
     text-decoration: none;
+    font-weight: bold;
 }
 
 /* Header */
@@ -123,17 +123,14 @@ main {
     flex: 1 0 auto;
 }
 
-.header-divider {
+.section-divider {
     height: 1px;
     background-color: var(--border-color);
-    margin: 1rem auto 2rem;
+    margin: 1rem auto;
 }
 
 /* Footer */
 footer {
-    margin-top: 3rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border-color);
     color: var(--secondary-text);
     flex-shrink: 0;
 }
@@ -218,7 +215,6 @@ footer a {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
-    margin: 1rem 0;
 }
 
 .contact-links a {

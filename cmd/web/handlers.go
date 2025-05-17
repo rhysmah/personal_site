@@ -3,13 +3,8 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log/slog"
 	"net/http"
 )
-
-type application struct {
-	logger *slog.Logger
-}
 
 func (app *application) render(w http.ResponseWriter, r *http.Request, t string) {
 	// Slice containing paths to HTMLs. Base template must be *first*
@@ -27,7 +22,7 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, t string)
 	}
 
 	// Write content of the "base" template as response body
-	err = ts.ExecuteTemplate(w, "base", nil)
+	err = ts.ExecuteTemplate(w, "base", app.siteData)
 	if err != nil {
 		app.serverError(w, r, err)
 	}

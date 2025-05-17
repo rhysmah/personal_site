@@ -26,8 +26,7 @@
 <body>
     <header>
         <h1><a href="/">Rhys Mahannah</a></h1>
-
-        <!-- Desktop Navigation -->
+        
         <nav class="nav-links desktop-nav" aria-label="Main navigation">
             <a href="/about">About</a>
             <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
@@ -50,22 +49,23 @@
         </div>
     </header>
 
-<div class="header-divider"></div>
-
+    <div class="section-divider"></div>
     <main>
         {{template "main" .}}
     </main>
+    <div class="section-divider"></div>
 
     <footer>
-        <div class="contact-links">
-            <a href="https://github.com/rhysmah" target="_blank">> GitHub</a>
-            <a href="https://linkedin.com/in/rhysmahannah" target="_blank">> LinkedIn</a>
+        <div class="contact-links nav-links">
+            <a href="https://github.com/rhysmah" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/rhysmahannah" target="_blank">LinkedIn</a>
         </div>
 
-        <p>Created by Rhys. 2025.</p>
-        <p>Powered by <a href="https://golang.org/" rel="noopener">Go</a>.
-    </footer>
+        <div class="section-divider"></div>
 
+        <p>Created by Rhys.</p>
+        <p>Powered by <a href="https://golang.org/" rel="noopener">Go</a>. 2025.
+    </footer>
 </body>
 </html>
 {{end}}
